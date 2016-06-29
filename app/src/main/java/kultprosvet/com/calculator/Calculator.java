@@ -4,18 +4,20 @@ import android.content.Context;
 
 public class Calculator {
     private static Calculator sCalcInstance;
-    private double mCurrentValue;
-    private double mHiddenValue;
-    private double mScreenResult;
+    private String mCurrentValue;
+    private String mHiddenValue;
+    private String mScreenResult;
+
     private boolean mCommaClicked;
     private Operations mOperation;
     private Context mContext;
 
     private Calculator(Context context) {
-        mCurrentValue = Const.ZERO_VALUE;
-        mHiddenValue = Const.ZERO_VALUE;
+        mCurrentValue = Const.EMPTY;
+        mHiddenValue = Const.EMPTY;
+        mScreenResult = Const.EMPTY;
+
         mOperation = null;
-        mScreenResult = Const.ZERO_VALUE;
         mContext = context;
     }
 
@@ -61,28 +63,39 @@ public class Calculator {
         }
     }
 
-    public double getScreenResult() {
+    public String getScreenResult() {
         return mScreenResult;
     }
 
-    public void setCurrentValue(double value) {
+    public void setCurrentValue(String value) {
         mCurrentValue = value;
     }
 
     private void numberClicked(int number){
-        if( !mCommaClicked) {
-            mCurrentValue = mCurrentValue * Const.DOUBLE_VAL_COEFF + number;
+        if( number == Const.ZERO_VALUE
+                && !mCommaClicked
+                && mCurrentValue.length() == 1
+                && String.valueOf(mCurrentValue.charAt(0)).equals(Const.ZERO)) {
             mScreenResult = mCurrentValue;
         } else {
-            String currentStr = mCurrentValue + "";
-            String resultStr;
-            if(String.valueOf(currentStr.charAt(currentStr.length() - 1)).equals(Const.ZERO)) {
-                resultStr = currentStr.substring(0, currentStr.length() - 2) + Const.COMMA + number;
+            // entering integer numbers
+            if (!mCommaClicked) {
+                if(mCurrentValue.equals(Const.ZERO)) {
+                    // replace 0 to entered value
+                    mCurrentValue = Const.EMPTY + number;
+                } else {
+                    mCurrentValue = mCurrentValue + number;
+                }
+                mScreenResult = mCurrentValue;
             } else {
-                resultStr = currentStr + number;
+                // entering decimal numbers
+                if ( !mCurrentValue.contains(Const.COMMA)) {
+                    mCurrentValue = mCurrentValue + Const.COMMA + number;
+                } else {
+                    mCurrentValue = mCurrentValue + number;
+                }
+                mScreenResult = mCurrentValue;
             }
-            mCurrentValue = Double.parseDouble(resultStr);
-            mScreenResult = mCurrentValue;
         }
     }
 
@@ -90,10 +103,10 @@ public class Calculator {
      * clear all fields
      */
     public void clearScreenClicked()  {
-        mCurrentValue = Const.ZERO_VALUE;
-        mHiddenValue = Const.ZERO_VALUE;
+        mCurrentValue = Const.EMPTY;
+        mHiddenValue = Const.EMPTY;
+        mScreenResult = Const.EMPTY;
         mOperation = null;
-        mScreenResult = Const.ZERO_VALUE;
         mCommaClicked = false;
     }
 
@@ -109,28 +122,29 @@ public class Calculator {
                 break;
         }
         mHiddenValue = mCurrentValue;
-        mCurrentValue = Const.ZERO_VALUE;
-        mScreenResult = Const.ZERO_VALUE;
+        mCurrentValue = Const.EMPTY;
+        mScreenResult = Const.EMPTY;
+
         mCommaClicked = false;
     }
 
     public void equalsClicked() {
         if (mOperation == Operations.MULTIPLY){
-            mCurrentValue = mHiddenValue * mCurrentValue;
+            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) * Double.parseDouble(mCurrentValue) );
         }
         if (mOperation == Operations.DELIM){
-            if (mCurrentValue == Const.ZERO_VALUE) {
+            if (mCurrentValue.equals(Const.ZERO)) {
                 // division by zero
                 nanExeptionReport();
             } else {
-                mCurrentValue = mHiddenValue / mCurrentValue;
+                mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) / Double.parseDouble(mCurrentValue) );
             }
         }
         if (mOperation == Operations.PLUS){
-            mCurrentValue = mHiddenValue + mCurrentValue;
+            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) + Double.parseDouble(mCurrentValue) );
         }
         if (mOperation == Operations.MINUS){
-            mCurrentValue = mHiddenValue - mCurrentValue;
+            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) - Double.parseDouble(mCurrentValue) );
         }
         mHiddenValue = mCurrentValue;
         mScreenResult = mCurrentValue;
@@ -147,11 +161,10 @@ public class Calculator {
      * method changed the sign +/- of entered value
      */
     public void toggleChanged() {
-        String toggledValue = String.valueOf(mCurrentValue);
-        if(String.valueOf(toggledValue.charAt(0)).equals(Const.OPER_MINUS)) {
-            mCurrentValue = Double.parseDouble(toggledValue.substring(1, (toggledValue.length() - 1)) );
+        if(String.valueOf(mCurrentValue.charAt(0)).equals(Const.OPER_MINUS)) {
+            mCurrentValue = mCurrentValue.substring(1, (mCurrentValue.length() - 1));
         } else {
-            mCurrentValue = Double.parseDouble(Const.OPER_MINUS + toggledValue);
+            mCurrentValue = Const.OPER_MINUS + mCurrentValue;
         }
         mScreenResult = mCurrentValue;
     }

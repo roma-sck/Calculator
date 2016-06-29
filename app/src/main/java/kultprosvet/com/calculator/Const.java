@@ -1,7 +1,8 @@
 package kultprosvet.com.calculator;
 
 public class Const {
-    protected static final double ZERO_VALUE = 0;
+    protected static final int ZERO_VALUE = 0;
+    protected static final String EMPTY = "";
     protected static final String ONE = "1";
     protected static final String TWO = "2";
     protected static final String THREE = "3";
@@ -20,5 +21,4 @@ public class Const {
     protected static final String EQUALS = "=";
     protected static final String CLEAR = "C";
     protected static final String TOGGLE = "+/-";
-    protected static final int DOUBLE_VAL_COEFF = 10;
 }

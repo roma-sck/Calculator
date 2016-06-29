@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button0) Button mButton0;
     @BindView(R.id.result_screen) TextView mScreenView;
     private final static String SAVED_VALUE_KEY = "double_value";
-    private double mDisplayedValue;
+    private String mDisplayedValue;
+
     private Calculator mCalc;
 
     @Override
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState != null){
-            mDisplayedValue = savedInstanceState.getDouble(SAVED_VALUE_KEY);
+            mDisplayedValue = savedInstanceState.getString(SAVED_VALUE_KEY);
+
             mScreenView.setText(String.valueOf(mDisplayedValue));
         }
         mCalc = Calculator.getInstance(this);
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putDouble(SAVED_VALUE_KEY, mDisplayedValue);
+        outState.putString(SAVED_VALUE_KEY, mDisplayedValue);
     }
 
     /**
@@ -58,14 +60,22 @@ public class MainActivity extends AppCompatActivity {
             R.id.button_clear, R.id.button_toggle, R.id.button_comma})
     public void onButtonClick(Button btn) {
         String btnText = btn.getText().toString();
-        if(mDisplayedValue != 0) {
+        if(mDisplayedValue != null) {
             // set current value after screen rotation
             mCalc.setCurrentValue(mDisplayedValue);
         }
         mCalc.calculate(btnText);
         // get calculated result and shows it on screen
         mDisplayedValue = mCalc.getScreenResult();
-        mScreenView.setText(String.valueOf(mDisplayedValue));
+        setScreenView(mDisplayedValue);
+    }
+
+    private void setScreenView(String value) {
+        if(value.equals(Const.EMPTY)) {
+            mScreenView.setText(String.valueOf(Const.ZERO));
+        } else {
+            mScreenView.setText(String.valueOf(value));
+        }
     }
 
     @Override
