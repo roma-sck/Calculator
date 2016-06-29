@@ -121,30 +121,38 @@ public class Calculator {
             case Const.OPER_MINUS: mOperation = Operations.MINUS;
                 break;
         }
+        if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
+            equalsClicked();
+            mHiddenValue = Const.EMPTY;
+            mCurrentValue = Const.EMPTY;
+            return;
+        }
         mHiddenValue = mCurrentValue;
         mCurrentValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
-
         mCommaClicked = false;
     }
 
     public void equalsClicked() {
+        double hiddenValDouble = Double.parseDouble(mHiddenValue);
+        double currentValDouble = Double.parseDouble(mCurrentValue);
+
         if (mOperation == Operations.MULTIPLY){
-            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) * Double.parseDouble(mCurrentValue) );
+            mCurrentValue = String.valueOf( hiddenValDouble * currentValDouble);
         }
         if (mOperation == Operations.DELIM){
             if (mCurrentValue.equals(Const.ZERO)) {
                 // division by zero
                 nanExeptionReport();
             } else {
-                mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) / Double.parseDouble(mCurrentValue) );
+                mCurrentValue = String.valueOf( hiddenValDouble / currentValDouble);
             }
         }
         if (mOperation == Operations.PLUS){
-            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) + Double.parseDouble(mCurrentValue) );
+            mCurrentValue = String.valueOf( hiddenValDouble + currentValDouble);
         }
         if (mOperation == Operations.MINUS){
-            mCurrentValue = String.valueOf( Double.parseDouble(mHiddenValue) - Double.parseDouble(mCurrentValue) );
+            mCurrentValue = String.valueOf( hiddenValDouble - currentValDouble);
         }
         mHiddenValue = mCurrentValue;
         mScreenResult = mCurrentValue;
