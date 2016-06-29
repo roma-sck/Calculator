@@ -134,30 +134,32 @@ public class Calculator {
     }
 
     public void equalsClicked() {
-        double hiddenValDouble = Double.parseDouble(mHiddenValue);
-        double currentValDouble = Double.parseDouble(mCurrentValue);
+        if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
+            double hiddenValDouble = Double.parseDouble(mHiddenValue);
+            double currentValDouble = Double.parseDouble(mCurrentValue);
 
-        if (mOperation == Operations.MULTIPLY){
-            mCurrentValue = String.valueOf( hiddenValDouble * currentValDouble);
-        }
-        if (mOperation == Operations.DELIM){
-            if (mCurrentValue.equals(Const.ZERO)) {
-                // division by zero
-                nanExeptionReport();
-            } else {
-                mCurrentValue = String.valueOf( hiddenValDouble / currentValDouble);
+            if (mOperation == Operations.MULTIPLY) {
+                mCurrentValue = String.valueOf(hiddenValDouble * currentValDouble);
             }
+            if (mOperation == Operations.DELIM) {
+                if (mCurrentValue.equals(Const.ZERO)) {
+                    // division by zero
+                    nanExeptionReport();
+                } else {
+                    mCurrentValue = String.valueOf(hiddenValDouble / currentValDouble);
+                }
+            }
+            if (mOperation == Operations.PLUS) {
+                mCurrentValue = String.valueOf(hiddenValDouble + currentValDouble);
+            }
+            if (mOperation == Operations.MINUS) {
+                mCurrentValue = String.valueOf(hiddenValDouble - currentValDouble);
+            }
+            mHiddenValue = mCurrentValue;
+            mScreenResult = mCurrentValue;
+            mOperation = null;
+            mCommaClicked = false;
         }
-        if (mOperation == Operations.PLUS){
-            mCurrentValue = String.valueOf( hiddenValDouble + currentValDouble);
-        }
-        if (mOperation == Operations.MINUS){
-            mCurrentValue = String.valueOf( hiddenValDouble - currentValDouble);
-        }
-        mHiddenValue = mCurrentValue;
-        mScreenResult = mCurrentValue;
-        mOperation = null;
-        mCommaClicked = false;
     }
 
     private void nanExeptionReport() {
@@ -169,12 +171,14 @@ public class Calculator {
      * method changed the sign +/- of entered value
      */
     public void toggleChanged() {
-        if(String.valueOf(mCurrentValue.charAt(0)).equals(Const.OPER_MINUS)) {
-            mCurrentValue = mCurrentValue.substring(1, (mCurrentValue.length() - 1));
-        } else {
-            mCurrentValue = Const.OPER_MINUS + mCurrentValue;
+        if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
+            if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
+                mCurrentValue = mCurrentValue.substring(1, (mCurrentValue.length()));
+            } else {
+                mCurrentValue = Const.OPER_MINUS + mCurrentValue;
+            }
+            mScreenResult = mCurrentValue;
         }
-        mScreenResult = mCurrentValue;
     }
 
     private void commaClicked() {
