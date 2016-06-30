@@ -74,8 +74,8 @@ public class Calculator {
     private void numberClicked(int number){
         if( number == Const.ZERO_VALUE
                 && !mCommaClicked
-                && mCurrentValue.length() == 1
-                && String.valueOf(mCurrentValue.charAt(0)).equals(Const.ZERO)) {
+                && mCurrentValue.length() == Const.ONE_VALUE
+                && String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.ZERO)) {
             mScreenResult = mCurrentValue;
         } else {
             // entering integer numbers
@@ -173,7 +173,7 @@ public class Calculator {
     public void toggleChanged() {
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
-                mCurrentValue = mCurrentValue.substring(1, (mCurrentValue.length()));
+                mCurrentValue = mCurrentValue.substring(Const.ONE_VALUE, (mCurrentValue.length()));
             } else {
                 mCurrentValue = Const.OPER_MINUS + mCurrentValue;
             }

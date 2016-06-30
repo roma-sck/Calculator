@@ -2,6 +2,7 @@ package kultprosvet.com.calculator;
 
 public class Const {
     protected static final int ZERO_VALUE = 0;
+    protected static final int ONE_VALUE = 1;
     protected static final String EMPTY = "";
     protected static final String ONE = "1";
     protected static final String TWO = "2";
