@@ -80,8 +80,8 @@ public class Calculator {
         } else {
             // entering integer numbers
             if (!mCommaClicked) {
-                if(mCurrentValue.equals(Const.ZERO)) {
-                    // replace 0 to entered value
+                if(mCurrentValue.equals(Const.ZERO) || mCurrentValue.equals(Const.ZERO_DOUBLE)) {
+                    // replace 0 or 0.0 to entered value
                     mCurrentValue = Const.EMPTY + number;
                 } else {
                     mCurrentValue = mCurrentValue + number;

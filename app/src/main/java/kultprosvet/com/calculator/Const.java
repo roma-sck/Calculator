@@ -15,6 +15,7 @@ public class Const {
     protected static final String NINE = "9";
     protected static final String ZERO = "0";
     protected static final String COMMA = ".";
+    protected static final String ZERO_DOUBLE = "0.0";
     protected static final String OPER_MULT = "*";
     protected static final String OPER_DELIM = "/";
     protected static final String OPER_PLUS = "+";
