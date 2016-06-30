@@ -9,9 +9,9 @@
 	</style>
 
 	<style name="ButtonStyle">
-		<item name="android:layout_width">@dimen/btn_width</item>
-		<item name="android:layout_height">match_parent</item>
-		<item name="android:layout_weight">1</item>
+		<item name="layout_gravity">fill</item>
+		<item name="layout_rowWeight">1</item>
+		<item name="layout_columnWeight">1</item>
 		<item name="android:textSize">@dimen/btn_text_size</item>
 	</style>
 
