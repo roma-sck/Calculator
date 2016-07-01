@@ -196,6 +196,7 @@ public class Calculator {
             mCurrentValue = mCurrentValue.substring(
                     Const.ZERO_VALUE, mCurrentValue.length()- Const.ONE_VALUE);
             mScreenResult = mCurrentValue;
+            mHiddenValue = Const.EMPTY;
         }
     }
 }
