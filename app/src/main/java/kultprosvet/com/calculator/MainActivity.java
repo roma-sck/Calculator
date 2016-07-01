@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null){
             mDisplayedValue = savedInstanceState.getString(SAVED_VALUE_KEY);
-
             mScreenView.setText(String.valueOf(mDisplayedValue));
         }
         mCalc = Calculator.getInstance(this);
@@ -47,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        if(mDisplayedValue == null || mDisplayedValue.equals(Const.ZERO) || mDisplayedValue.equals(Const.EMPTY)) {
+            mDisplayedValue = Const.ZERO;
+        }
         outState.putString(SAVED_VALUE_KEY, mDisplayedValue);
     }
 
