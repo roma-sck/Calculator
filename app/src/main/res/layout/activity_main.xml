@@ -1,132 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:paddingBottom="@dimen/activity_vertical_margin"
-	android:paddingLeft="@dimen/activity_horizontal_margin"
-	android:paddingRight="@dimen/activity_horizontal_margin"
-	android:paddingTop="@dimen/activity_vertical_margin"
-	android:background="@color/calc_background"
-	tools:context="kultprosvet.com.calculator.MainActivity"
-	app:columnCount="4"
-	>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/calc_background"
+    tools:context="kultprosvet.com.calculator.MainActivity"
+    app:columnCount="4" >
 
-	<TextView
-		android:id="@+id/result_screen"
-		style="@style/ResultScreenStyle"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		app:layout_columnSpan="4"
-		app:layout_gravity="fill"
-		android:layout_margin="@dimen/result_screen_margin" />
-
-		<Button
-			android:id="@+id/button1"
-			style="@style/ButtonStyle"
-			app:layout_gravity="fill"
-			android:text="@string/button1_text"
-			app:layout_row="1"
-			/>
-		<Button
-			android:id="@+id/button2"
-			style="@style/ButtonStyle"
-			android:text="@string/button2_text"/>
-		<Button
-			android:id="@+id/button3"
-			style="@style/ButtonStyle"
-			android:text="@string/button3_text"/>
-		<Button
-			android:id="@+id/button_plus"
-			style="@style/ButtonStyle"
-			android:text="@string/button_plus_text"
-
-			/>
-
-
-
-		<Button
-			android:id="@+id/button4"
-			style="@style/ButtonStyle"
-			android:text="@string/button4_text"
-
-			/>
-		<Button
-			android:id="@+id/button5"
-			style="@style/ButtonStyle"
-			android:text="@string/button5_text"/>
-		<Button
-			android:id="@+id/button6"
-			style="@style/ButtonStyle"
-			android:text="@string/button6_text"/>
-		<Button
-			android:id="@+id/button_delim"
-			style="@style/ButtonStyle"
-			android:text="@string/button_delim_text"
-
-			/>
-
-
-
-		<Button
-			android:id="@+id/button7"
-			style="@style/ButtonStyle"
-			android:text="@string/button7_text"
-			app:layout_row="3"/>
-		<Button
-			android:id="@+id/button8"
-			style="@style/ButtonStyle"
-			android:text="@string/button8_text"/>
-		<Button
-			android:id="@+id/button9"
-			style="@style/ButtonStyle"
-			android:text="@string/button9_text"/>
-		<Button
-			android:id="@+id/button_multiply"
-			style="@style/ButtonStyle"
-			android:text="@string/button_multiply_text"/>
-
-
-
-		<Button
-			android:id="@+id/button_comma"
-			style="@style/ButtonStyle"
-			android:text="@string/button_comma_text"
-			app:layout_row="4"/>
-		<Button
-			android:id="@+id/button0"
-			style="@style/ButtonStyle"
-			android:text="@string/button0_text"/>
-		<Button
-			android:id="@+id/button_toggle"
-			style="@style/ButtonStyle"
-			android:text="@string/button_toogle_text"/>
-		<Button
-			android:id="@+id/button_minus"
-			style="@style/ButtonStyle"
-			android:text="@string/button_minus_text"/>
-
-		<Space
-			android:layout_height="20dp"
-		    app:layout_columnSpan="4"
-			/>
-
-		<Button
-			android:id="@+id/button_equals"
-			style="@style/ButtonStyle"
-			android:text="@string/button_equals_text"
-			app:layout_row="5"
-			app:layout_columnSpan="2"
-			/>
-
-		<Button
-			android:id="@+id/button_clear"
-			style="@style/ButtonStyle"
-			android:text="@string/button_clear_text"
-			app:layout_columnSpan="2"
-			app:layout_gravity="fill"/>
-
+    <TextView
+        android:id="@+id/result_screen"
+        style="@style/ResultScreenStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_columnSpan="4"
+        app:layout_gravity="fill"
+        android:layout_margin="@dimen/result_screen_margin" />
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonStyle"
+        android:text="@string/button1_text" />
+    <Button
+        android:id="@+id/button2"
+        style="@style/ButtonStyle"
+        android:text="@string/button2_text" />
+    <Button
+        android:id="@+id/button3"
+        style="@style/ButtonStyle"
+        android:text="@string/button3_text" />
+    <Button
+        android:id="@+id/button_plus"
+        style="@style/ButtonStyle"
+        android:text="@string/button_plus_text" />
+    <Button
+        android:id="@+id/button4"
+        style="@style/ButtonStyle"
+        android:text="@string/button4_text" />
+    <Button
+        android:id="@+id/button5"
+        style="@style/ButtonStyle"
+        android:text="@string/button5_text" />
+    <Button
+        android:id="@+id/button6"
+        style="@style/ButtonStyle"
+        android:text="@string/button6_text" />
+    <Button
+        android:id="@+id/button_delim"
+        style="@style/ButtonStyle"
+        android:text="@string/button_delim_text" />
+    <Button
+        android:id="@+id/button7"
+        style="@style/ButtonStyle"
+        android:text="@string/button7_text" />
+    <Button
+        android:id="@+id/button8"
+        style="@style/ButtonStyle"
+        android:text="@string/button8_text"/>
+    <Button
+        android:id="@+id/button9"
+        style="@style/ButtonStyle"
+        android:text="@string/button9_text" />
+    <Button
+        android:id="@+id/button_multiply"
+        style="@style/ButtonStyle"
+        android:text="@string/button_multiply_text" />
+    <Button
+        android:id="@+id/button_comma"
+        style="@style/ButtonStyle"
+        android:text="@string/button_comma_text" />
+    <Button
+        android:id="@+id/button0"
+        style="@style/ButtonStyle"
+        android:text="@string/button0_text" />
+    <Button
+        android:id="@+id/button_toggle"
+        style="@style/ButtonStyle"
+        android:text="@string/button_toogle_text" />
+    <Button
+        android:id="@+id/button_minus"
+        style="@style/ButtonStyle"
+        android:text="@string/button_minus_text" />
+    <Space
+        android:layout_height="20dp"
+        app:layout_columnSpan="4" />
+    <Button
+        android:id="@+id/button_clear"
+        style="@style/ButtonStyle"
+        android:text="@string/button_clear_text"
+        app:layout_columnSpan="2" />
+    <Button
+        android:id="@+id/button_equals"
+        style="@style/ButtonStyle"
+        android:text="@string/button_equals_text"
+        app:layout_columnSpan="2" />
 
 </android.support.v7.widget.GridLayout>
