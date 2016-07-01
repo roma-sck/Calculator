@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
             R.id.button7, R.id.button8, R.id.button9, R.id.button0, R.id.button_equals,
             R.id.button_plus, R.id.button_minus, R.id.button_multiply, R.id.button_delim,
-            R.id.button_clear, R.id.button_toggle, R.id.button_comma})
+            R.id.button_clear, R.id.button_delete, R.id.button_toggle, R.id.button_comma})
     public void onButtonClick(Button btn) {
         String btnText = btn.getText().toString();
         if(mDisplayedValue != null) {

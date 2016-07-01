@@ -57,6 +57,9 @@ public class Calculator {
             case Const.CLEAR:
                 clearScreenClicked();
                 break;
+            case Const.DELETE:
+                deleteClicked();
+                break;
             case Const.TOGGLE:
                 toggleChanged();
                 break;
@@ -184,5 +187,15 @@ public class Calculator {
     private void commaClicked() {
         // it is possible to enter decimal
         mCommaClicked = true;
+    }
+
+    private void deleteClicked() {
+        if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
+                || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {
+            // delete last number
+            mCurrentValue = mCurrentValue.substring(
+                    Const.ZERO_VALUE, mCurrentValue.length()- Const.ONE_VALUE);
+            mScreenResult = mCurrentValue;
+        }
     }
 }

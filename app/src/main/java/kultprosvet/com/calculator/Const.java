@@ -22,5 +22,6 @@ public class Const {
     protected static final String OPER_MINUS = "-";
     protected static final String EQUALS = "=";
     protected static final String CLEAR = "C";
+    protected static final String DELETE = "<";
     protected static final String TOGGLE = "+/-";
 }

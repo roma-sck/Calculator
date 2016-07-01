@@ -17,6 +17,7 @@
 	<string name="button0_text" translatable="false">0</string>
 	<string name="button_comma_text" translatable="false">.</string>
 	<string name="button_clear_text" translatable="false">C</string>
+	<string name="button_delete_text" translatable="false">&lt;</string>
 	<string name="button_equals_text" translatable="false">=</string>
 	<string name="button_toogle_text" translatable="false">+/-</string>
 	<string name="button_plus_text" translatable="false">+</string>

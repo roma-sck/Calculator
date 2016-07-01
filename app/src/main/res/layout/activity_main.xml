@@ -91,8 +91,11 @@
     <Button
         android:id="@+id/button_clear"
         style="@style/ButtonStyle"
-        android:text="@string/button_clear_text"
-        app:layout_columnSpan="2" />
+        android:text="@string/button_clear_text" />
+    <Button
+        android:id="@+id/button_delete"
+        style="@style/ButtonStyle"
+        android:text="@string/button_delete_text" />
     <Button
         android:id="@+id/button_equals"
         style="@style/ButtonStyle"
