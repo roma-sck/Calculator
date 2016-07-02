@@ -7,7 +7,6 @@ public class Calculator {
     private String mCurrentValue;
     private String mHiddenValue;
     private String mScreenResult;
-
     private boolean mCommaClicked;
     private Operations mOperation;
     private Context mContext;
@@ -16,7 +15,6 @@ public class Calculator {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
-
         mOperation = null;
         mContext = context;
     }

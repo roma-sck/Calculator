@@ -1,6 +1,7 @@
 package kultprosvet.com.calculator;
 
 public class Const {
+    protected static final String SAVED_VALUE_KEY = "double_value";
     protected static final int ZERO_VALUE = 0;
     protected static final int ONE_VALUE = 1;
     protected static final String EMPTY = "";

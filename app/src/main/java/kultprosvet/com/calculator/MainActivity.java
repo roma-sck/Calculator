@@ -25,9 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button9) Button mButton9;
     @BindView(R.id.button0) Button mButton0;
     @BindView(R.id.result_screen) TextView mScreenView;
-    private final static String SAVED_VALUE_KEY = "double_value";
     private String mDisplayedValue;
-
     private Calculator mCalc;
 
     @Override
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState != null){
-            mDisplayedValue = savedInstanceState.getString(SAVED_VALUE_KEY);
+            mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
             setScreenView(mDisplayedValue);
         }
         mCalc = Calculator.getInstance(this);
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(SAVED_VALUE_KEY, mDisplayedValue);
+        outState.putString(Const.SAVED_VALUE_KEY, mDisplayedValue);
     }
 
     /**
