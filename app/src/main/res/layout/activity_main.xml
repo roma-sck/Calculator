@@ -50,9 +50,9 @@
         style="@style/ButtonStyle"
         android:text="@string/button6_text" />
     <Button
-        android:id="@+id/button_delim"
+        android:id="@+id/button_minus"
         style="@style/ButtonStyle"
-        android:text="@string/button_delim_text" />
+        android:text="@string/button_minus_text" />
     <Button
         android:id="@+id/button7"
         style="@style/ButtonStyle"
@@ -82,9 +82,9 @@
         style="@style/ButtonStyle"
         android:text="@string/button_toogle_text" />
     <Button
-        android:id="@+id/button_minus"
+        android:id="@+id/button_delim"
         style="@style/ButtonStyle"
-        android:text="@string/button_minus_text" />
+        android:text="@string/button_delim_text" />
     <Space
         android:layout_height="20dp"
         app:layout_columnSpan="4" />

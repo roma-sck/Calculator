@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(mDisplayedValue == null || mDisplayedValue.equals(Const.ZERO) || mDisplayedValue.equals(Const.EMPTY)) {
-            mDisplayedValue = Const.ZERO;
-        }
         outState.putString(SAVED_VALUE_KEY, mDisplayedValue);
     }
 
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setScreenView(String value) {
-        if(value.equals(Const.EMPTY)) {
+        if(value == null || value.equals(Const.EMPTY)) {
             mScreenView.setText(String.valueOf(Const.ZERO));
         } else {
             mScreenView.setText(String.valueOf(value));

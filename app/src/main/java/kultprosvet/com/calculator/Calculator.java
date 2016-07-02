@@ -131,7 +131,6 @@ public class Calculator {
             return;
         }
         mHiddenValue = mCurrentValue;
-        mCurrentValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
         mCommaClicked = false;
     }
