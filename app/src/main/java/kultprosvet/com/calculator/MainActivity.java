@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null){
             mDisplayedValue = savedInstanceState.getString(SAVED_VALUE_KEY);
-            mScreenView.setText(String.valueOf(mDisplayedValue));
+            setScreenView(mDisplayedValue);
         }
         mCalc = Calculator.getInstance(this);
     }
