@@ -95,7 +95,12 @@ public class Calculator {
                 if ( !mCurrentValue.contains(Const.COMMA)) {
                     mCurrentValue = mCurrentValue + Const.COMMA + number;
                 } else {
-                    mCurrentValue = mCurrentValue + number;
+                    if(mCurrentValue.equals(Const.EMPTY)) {
+                        // if current value epty - add zero at first position (0.9 instead .9)
+                        mCurrentValue = Const.ZERO + number;
+                    } else {
+                        mCurrentValue = mCurrentValue + number;
+                    }
                 }
                 mScreenResult = mCurrentValue;
             }
