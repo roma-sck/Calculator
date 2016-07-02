@@ -124,13 +124,9 @@ public class Calculator {
             case Const.OPER_MINUS: mOperation = Operations.MINUS;
                 break;
         }
-        if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
-            equalsClicked();
-            mHiddenValue = Const.EMPTY;
-            mCurrentValue = Const.EMPTY;
-            return;
+        if( !mCurrentValue.equals(Const.EMPTY)) {
+            mHiddenValue = mCurrentValue;
         }
-        mHiddenValue = mCurrentValue;
         mScreenResult = Const.EMPTY;
         mCommaClicked = false;
     }
@@ -146,7 +142,7 @@ public class Calculator {
             if (mOperation == Operations.DELIM) {
                 if (mCurrentValue.equals(Const.ZERO)) {
                     // division by zero
-                    nanExeptionReport();
+                    nanExceptionReport();
                 } else {
                     mCurrentValue = String.valueOf(hiddenValDouble / currentValDouble);
                 }
@@ -159,12 +155,13 @@ public class Calculator {
             }
             mHiddenValue = mCurrentValue;
             mScreenResult = mCurrentValue;
+            mCurrentValue = Const.EMPTY;
             mOperation = null;
             mCommaClicked = false;
         }
     }
 
-    private void nanExeptionReport() {
+    private void nanExceptionReport() {
         clearScreenClicked();
         MainActivity.showExceptionDialog(mContext);
     }
