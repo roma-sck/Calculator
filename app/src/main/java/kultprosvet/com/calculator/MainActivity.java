@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button9) Button mButton9;
     @BindView(R.id.button0) Button mButton0;
     @BindView(R.id.result_screen) TextView mScreenView;
+    @BindView(R.id.mini_display_detail) TextView mMiniDisplay;
     private String mDisplayedValue;
     private Calculator mCalc;
 
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // get calculated result and shows it on screen
         mDisplayedValue = mCalc.getScreenResult();
         setScreenView(mDisplayedValue);
+        mMiniDisplay.setText(mCalc.getMiniDisplayResult());
     }
 
     private void setScreenView(String value) {

@@ -10,11 +10,13 @@ public class Calculator {
     private boolean mCommaClicked;
     private Operations mOperation;
     private Context mContext;
+    private String mMiniDisplayResult;
 
     private Calculator(Context context) {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
+        mMiniDisplayResult = Const.EMPTY;
         mOperation = null;
         mContext = context;
     }
@@ -73,6 +75,7 @@ public class Calculator {
     }
 
     private void numberClicked(int number){
+        mMiniDisplayResult = Const.EMPTY;
         if( number == Const.ZERO_VALUE
                 && !mCommaClicked
                 && mCurrentValue.length() == Const.ONE_VALUE
@@ -112,11 +115,13 @@ public class Calculator {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
+        mMiniDisplayResult = Const.EMPTY;
         mOperation = null;
         mCommaClicked = false;
     }
 
     public void operatorClicked(String oper) {
+        mMiniDisplayResult = Const.EMPTY;
         switch (oper) {
             case Const.OPER_MULT: mOperation = Operations.MULTIPLY;
                 break;
@@ -134,7 +139,15 @@ public class Calculator {
         mCommaClicked = false;
     }
 
+    public String getMiniDisplayResult() {
+        if(mMiniDisplayResult == null) {
+            return Const.EMPTY;
+        }
+        return mMiniDisplayResult;
+    }
+
     public void equalsClicked() {
+        setMiniDisplayResult();
         if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
             double hiddenValDouble = Double.parseDouble(mHiddenValue);
             double currentValDouble = Double.parseDouble(mCurrentValue);
@@ -164,6 +177,22 @@ public class Calculator {
         }
     }
 
+    private void setMiniDisplayResult() {
+        String strOperation = Const.EMPTY;
+        switch (mOperation) {
+            case MULTIPLY : strOperation = Const.OPER_MULT;
+                break;
+            case DELIM : strOperation = Const.OPER_DELIM;
+                break;
+            case PLUS : strOperation = Const.OPER_PLUS;
+                break;
+            case MINUS : strOperation = Const.OPER_MINUS;
+                break;
+        }
+        mMiniDisplayResult = mHiddenValue + Const.SPACE
+                + strOperation + Const.SPACE + mCurrentValue  + Const.SPACE;
+    }
+
     private void nanExceptionReport() {
         clearScreenClicked();
         MainActivity.showExceptionDialog(mContext);
@@ -173,6 +202,7 @@ public class Calculator {
      * method changed the sign +/- of entered value
      */
     public void toggleChanged() {
+        mMiniDisplayResult = Const.EMPTY;
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
                 mCurrentValue = mCurrentValue.substring(Const.ONE_VALUE, (mCurrentValue.length()));
@@ -184,11 +214,13 @@ public class Calculator {
     }
 
     private void commaClicked() {
+        mMiniDisplayResult = Const.EMPTY;
         // it is possible to enter decimal
         mCommaClicked = true;
     }
 
     private void deleteClicked() {
+        mMiniDisplayResult = Const.EMPTY;
         if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
                 || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {
             // delete last number

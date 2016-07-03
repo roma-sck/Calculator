@@ -13,14 +13,23 @@
     tools:context="kultprosvet.com.calculator.MainActivity"
     app:columnCount="4" >
 
-    <TextView
-        android:id="@+id/result_screen"
-        style="@style/ResultScreenStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/result_screen_color"
         app:layout_columnSpan="4"
         app:layout_gravity="fill"
-        android:layout_margin="@dimen/result_screen_margin" />
+        android:gravity="end"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/result_screen_margin" >
+        <TextView
+            android:id="@+id/mini_display_detail"
+            style="@style/MiniDisplayStyle" />
+        <TextView
+            android:id="@+id/result_screen"
+            style="@style/ResultScreenStyle" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/button1"
         style="@style/ButtonStyle"

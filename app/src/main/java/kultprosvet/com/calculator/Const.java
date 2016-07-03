@@ -25,4 +25,5 @@ public class Const {
     protected static final String CLEAR = "C";
     protected static final String DELETE = "<";
     protected static final String TOGGLE = "+/-";
+    protected static final String SPACE = " ";
 }

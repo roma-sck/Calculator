@@ -8,6 +8,20 @@
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
+	<style name="TextViewStyle">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+	</style>
+
+	<style name="MiniDisplayStyle" parent="TextViewStyle">
+		<item name="android:textSize">@dimen/result_screen_mini_display_text_size</item>
+	</style>
+
+	<style name="ResultScreenStyle" parent="TextViewStyle">
+		<item name="android:text">@string/result_screen_default</item>
+		<item name="android:textSize">@dimen/result_screen_text_size</item>
+	</style>
+
 	<style name="ButtonStyle">
 		<item name="android:layout_height">@dimen/btn_layout_height_0dp</item>
 		<item name="android:layout_width">@dimen/btn_layout_width_0dp</item>
@@ -17,14 +31,14 @@
 		<item name="android:textSize">@dimen/btn_text_size</item>
 	</style>
 
-	<style name="ResultScreenStyle">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:background">@color/result_screen_color</item>
-		<item name="android:gravity">right</item>
-		<item name="android:text">@string/result_screen_default</item>
-		<item name="android:textSize">@dimen/result_screen_text_size</item>
-	</style>
+	<!--<style name="ResultScreenStyle">-->
+		<!--<item name="android:layout_width">match_parent</item>-->
+		<!--<item name="android:layout_height">wrap_content</item>-->
+		<!--<item name="android:background">@color/result_screen_color</item>-->
+		<!--<item name="android:gravity">right</item>-->
+		<!--<item name="android:text">@string/result_screen_default</item>-->
+		<!--<item name="android:textSize">@dimen/result_screen_text_size</item>-->
+	<!--</style>-->
 
 	<style name="HorizontalLinLayoutStyle">
 		<item name="android:orientation">horizontal</item>
