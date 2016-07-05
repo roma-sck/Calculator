@@ -1,6 +1,7 @@
 package kultprosvet.com.calculator;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kultprosvet.com.calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button1) Button mButton1;
@@ -28,18 +30,22 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mini_display_detail) TextView mMiniDisplay;
     private String mDisplayedValue;
     private Calculator mCalc;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        //setContentView(R.layout.activity_main);
+        mCalc = Calculator.getInstance(this);
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding.setCalc(mCalc);
+        //ButterKnife.bind(this);
 
         if (savedInstanceState != null){
             mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
             setScreenView(mDisplayedValue);
         }
-        mCalc = Calculator.getInstance(this);
+
     }
 
     @Override
