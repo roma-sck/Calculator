@@ -7,16 +7,16 @@ public class Calculator {
     private String mCurrentValue;
     private String mHiddenValue;
     private String mScreenResult;
-
     private boolean mCommaClicked;
     private Operations mOperation;
     private Context mContext;
+    private String mMiniDisplayResult;
 
     private Calculator(Context context) {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
-
+        mMiniDisplayResult = Const.EMPTY;
         mOperation = null;
         mContext = context;
     }
@@ -57,6 +57,9 @@ public class Calculator {
             case Const.CLEAR:
                 clearScreenClicked();
                 break;
+            case Const.DELETE:
+                deleteClicked();
+                break;
             case Const.TOGGLE:
                 toggleChanged();
                 break;
@@ -72,6 +75,7 @@ public class Calculator {
     }
 
     private void numberClicked(int number){
+        mMiniDisplayResult = Const.EMPTY;
         if( number == Const.ZERO_VALUE
                 && !mCommaClicked
                 && mCurrentValue.length() == Const.ONE_VALUE
@@ -92,7 +96,12 @@ public class Calculator {
                 if ( !mCurrentValue.contains(Const.COMMA)) {
                     mCurrentValue = mCurrentValue + Const.COMMA + number;
                 } else {
-                    mCurrentValue = mCurrentValue + number;
+                    if(mCurrentValue.equals(Const.EMPTY)) {
+                        // if current value epty - add zero at first position (0.9 instead .9)
+                        mCurrentValue = Const.ZERO + number;
+                    } else {
+                        mCurrentValue = mCurrentValue + number;
+                    }
                 }
                 mScreenResult = mCurrentValue;
             }
@@ -106,11 +115,13 @@ public class Calculator {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
+        mMiniDisplayResult = Const.EMPTY;
         mOperation = null;
         mCommaClicked = false;
     }
 
     public void operatorClicked(String oper) {
+        mMiniDisplayResult = Const.EMPTY;
         switch (oper) {
             case Const.OPER_MULT: mOperation = Operations.MULTIPLY;
                 break;
@@ -121,19 +132,22 @@ public class Calculator {
             case Const.OPER_MINUS: mOperation = Operations.MINUS;
                 break;
         }
-        if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
-            equalsClicked();
-            mHiddenValue = Const.EMPTY;
-            mCurrentValue = Const.EMPTY;
-            return;
+        if( !mCurrentValue.equals(Const.EMPTY)) {
+            mHiddenValue = mCurrentValue;
         }
-        mHiddenValue = mCurrentValue;
-        mCurrentValue = Const.EMPTY;
         mScreenResult = Const.EMPTY;
         mCommaClicked = false;
     }
 
+    public String getMiniDisplayResult() {
+        if(mMiniDisplayResult == null) {
+            return Const.EMPTY;
+        }
+        return mMiniDisplayResult;
+    }
+
     public void equalsClicked() {
+        setMiniDisplayResult();
         if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
             double hiddenValDouble = Double.parseDouble(mHiddenValue);
             double currentValDouble = Double.parseDouble(mCurrentValue);
@@ -144,7 +158,7 @@ public class Calculator {
             if (mOperation == Operations.DELIM) {
                 if (mCurrentValue.equals(Const.ZERO)) {
                     // division by zero
-                    nanExeptionReport();
+                    nanExceptionReport();
                 } else {
                     mCurrentValue = String.valueOf(hiddenValDouble / currentValDouble);
                 }
@@ -157,12 +171,29 @@ public class Calculator {
             }
             mHiddenValue = mCurrentValue;
             mScreenResult = mCurrentValue;
+            mCurrentValue = Const.EMPTY;
             mOperation = null;
             mCommaClicked = false;
         }
     }
 
-    private void nanExeptionReport() {
+    private void setMiniDisplayResult() {
+        String strOperation = Const.EMPTY;
+        switch (mOperation) {
+            case MULTIPLY : strOperation = Const.OPER_MULT;
+                break;
+            case DELIM : strOperation = Const.OPER_DELIM;
+                break;
+            case PLUS : strOperation = Const.OPER_PLUS;
+                break;
+            case MINUS : strOperation = Const.OPER_MINUS;
+                break;
+        }
+        mMiniDisplayResult = mHiddenValue + Const.SPACE
+                + strOperation + Const.SPACE + mCurrentValue  + Const.SPACE;
+    }
+
+    private void nanExceptionReport() {
         clearScreenClicked();
         MainActivity.showExceptionDialog(mContext);
     }
@@ -171,6 +202,7 @@ public class Calculator {
      * method changed the sign +/- of entered value
      */
     public void toggleChanged() {
+        mMiniDisplayResult = Const.EMPTY;
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
                 mCurrentValue = mCurrentValue.substring(Const.ONE_VALUE, (mCurrentValue.length()));
@@ -182,7 +214,20 @@ public class Calculator {
     }
 
     private void commaClicked() {
+        mMiniDisplayResult = Const.EMPTY;
         // it is possible to enter decimal
         mCommaClicked = true;
+    }
+
+    private void deleteClicked() {
+        mMiniDisplayResult = Const.EMPTY;
+        if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
+                || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {
+            // delete last number
+            mCurrentValue = mCurrentValue.substring(
+                    Const.ZERO_VALUE, mCurrentValue.length()- Const.ONE_VALUE);
+            mScreenResult = mCurrentValue;
+            mHiddenValue = Const.EMPTY;
+        }
     }
 }

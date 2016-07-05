@@ -1,6 +1,7 @@
 package kultprosvet.com.calculator;
 
 public class Const {
+    protected static final String SAVED_VALUE_KEY = "double_value";
     protected static final int ZERO_VALUE = 0;
     protected static final int ONE_VALUE = 1;
     protected static final String EMPTY = "";
@@ -22,5 +23,7 @@ public class Const {
     protected static final String OPER_MINUS = "-";
     protected static final String EQUALS = "=";
     protected static final String CLEAR = "C";
+    protected static final String DELETE = "<";
     protected static final String TOGGLE = "+/-";
+    protected static final String SPACE = " ";
 }

@@ -25,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button9) Button mButton9;
     @BindView(R.id.button0) Button mButton0;
     @BindView(R.id.result_screen) TextView mScreenView;
-    private final static String SAVED_VALUE_KEY = "double_value";
+    @BindView(R.id.mini_display_detail) TextView mMiniDisplay;
     private String mDisplayedValue;
-
     private Calculator mCalc;
 
     @Override
@@ -37,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState != null){
-            mDisplayedValue = savedInstanceState.getString(SAVED_VALUE_KEY);
-
-            mScreenView.setText(String.valueOf(mDisplayedValue));
+            mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
+            setScreenView(mDisplayedValue);
         }
         mCalc = Calculator.getInstance(this);
     }
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(SAVED_VALUE_KEY, mDisplayedValue);
+        outState.putString(Const.SAVED_VALUE_KEY, mDisplayedValue);
     }
 
     /**
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
             R.id.button7, R.id.button8, R.id.button9, R.id.button0, R.id.button_equals,
             R.id.button_plus, R.id.button_minus, R.id.button_multiply, R.id.button_delim,
-            R.id.button_clear, R.id.button_toggle, R.id.button_comma})
+            R.id.button_clear, R.id.button_delete, R.id.button_toggle, R.id.button_comma})
     public void onButtonClick(Button btn) {
         String btnText = btn.getText().toString();
         if(mDisplayedValue != null) {
@@ -68,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
         // get calculated result and shows it on screen
         mDisplayedValue = mCalc.getScreenResult();
         setScreenView(mDisplayedValue);
+        mMiniDisplay.setText(mCalc.getMiniDisplayResult());
     }
 
     private void setScreenView(String value) {
-        if(value.equals(Const.EMPTY)) {
+        if(value == null || value.equals(Const.EMPTY)) {
             mScreenView.setText(String.valueOf(Const.ZERO));
         } else {
             mScreenView.setText(String.valueOf(value));
