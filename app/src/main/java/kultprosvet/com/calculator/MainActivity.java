@@ -14,7 +14,6 @@ import kultprosvet.com.calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private Calculator mCalc;
-//    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
