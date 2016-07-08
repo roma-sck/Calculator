@@ -160,6 +160,10 @@ public class Calculator {
      */
     protected void toggleChanged() {
         observableMiniDisplayResult.set(Const.EMPTY);
+        if(observableResult.get().length() != Const.ZERO_VALUE && !observableResult.get().equals(Const.ZERO)) {
+            // after equals clicked, if change sign of result value
+            mCurrentValue = observableResult.get();
+        }
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
                 mCurrentValue = mCurrentValue.substring(Const.ONE_VALUE, (mCurrentValue.length()));
