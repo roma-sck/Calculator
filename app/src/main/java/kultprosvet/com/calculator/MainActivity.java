@@ -7,81 +7,52 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import kultprosvet.com.calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.button1) Button mButton1;
-    @BindView(R.id.button2) Button mButton2;
-    @BindView(R.id.button3) Button mButton3;
-    @BindView(R.id.button4) Button mButton4;
-    @BindView(R.id.button5) Button mButton5;
-    @BindView(R.id.button6) Button mButton6;
-    @BindView(R.id.button7) Button mButton7;
-    @BindView(R.id.button8) Button mButton8;
-    @BindView(R.id.button9) Button mButton9;
-    @BindView(R.id.button0) Button mButton0;
-    @BindView(R.id.result_screen) TextView mScreenView;
-    @BindView(R.id.mini_display_detail) TextView mMiniDisplay;
-    private String mDisplayedValue;
+
     private Calculator mCalc;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mCalc = Calculator.getInstance(this);
-        binding=DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setCalc(mCalc);
-        //ButterKnife.bind(this);
+        binding.setActivity(this);
 
-        if (savedInstanceState != null){
-            mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
-            setScreenView(mDisplayedValue);
-        }
-
+//        if (savedInstanceState != null){
+//            mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
+//            setScreenView(mDisplayedValue);
+//        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Const.SAVED_VALUE_KEY, mDisplayedValue);
+        outState.putString(Const.SAVED_VALUE_KEY, mCalc.getScreenResult());
     }
 
     /**
      * set onClick for all buttons
-     * @param btn clicked button
+     * @param view - clicked button
      */
-    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
-            R.id.button7, R.id.button8, R.id.button9, R.id.button0, R.id.button_equals,
-            R.id.button_plus, R.id.button_minus, R.id.button_multiply, R.id.button_delim,
-            R.id.button_clear, R.id.button_delete, R.id.button_toggle, R.id.button_comma})
-    public void onButtonClick(Button btn) {
-        String btnText = btn.getText().toString();
-        if(mDisplayedValue != null) {
-            // set current value after screen rotation
-            mCalc.setCurrentValue(mDisplayedValue);
-        }
+    public void onButtonClick(View view) {
+        String btnText = ((Button)view).getText().toString();
         mCalc.calculate(btnText);
-        // get calculated result and shows it on screen
-        mDisplayedValue = mCalc.getScreenResult();
-        setScreenView(mDisplayedValue);
-        mMiniDisplay.setText(mCalc.getMiniDisplayResult());
     }
 
-    private void setScreenView(String value) {
-        if(value == null || value.equals(Const.EMPTY)) {
-            mScreenView.setText(String.valueOf(Const.ZERO));
-        } else {
-            mScreenView.setText(String.valueOf(value));
-        }
-    }
+//    private void setScreenView(String value) {
+//        if(value == null || value.equals(Const.EMPTY)) {
+//            mScreenView.setText(String.valueOf(Const.ZERO));
+//        } else {
+//            mScreenView.setText(String.valueOf(value));
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

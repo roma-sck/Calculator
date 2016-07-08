@@ -1,22 +1,23 @@
 package kultprosvet.com.calculator;
 
 import android.content.Context;
+import android.databinding.ObservableField;
 
 public class Calculator {
     private static Calculator sCalcInstance;
     private String mCurrentValue;
     private String mHiddenValue;
-    private String mScreenResult;
     private boolean mCommaClicked;
     private Operations mOperation;
     private Context mContext;
-    private String mMiniDisplayResult;
+    public final ObservableField<String> observableMiniDisplayResult = new ObservableField<>();
+    public final ObservableField<String> observableResult = new ObservableField<>();
 
     private Calculator(Context context) {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
-        mScreenResult = Const.EMPTY;
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
+        observableResult.set(Const.EMPTY);
         mOperation = null;
         mContext = context;
     }
@@ -67,7 +68,7 @@ public class Calculator {
     }
 
     public String getScreenResult() {
-        return mScreenResult;
+        return observableResult.get();
     }
 
     public void setCurrentValue(String value) {
@@ -75,12 +76,12 @@ public class Calculator {
     }
 
     private void numberClicked(int number){
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
         if( number == Const.ZERO_VALUE
                 && !mCommaClicked
                 && mCurrentValue.length() == Const.ONE_VALUE
                 && String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.ZERO)) {
-            mScreenResult = mCurrentValue;
+            observableResult.set(mCurrentValue);
         } else {
             // entering integer numbers
             if (!mCommaClicked) {
@@ -90,7 +91,7 @@ public class Calculator {
                 } else {
                     mCurrentValue = mCurrentValue + number;
                 }
-                mScreenResult = mCurrentValue;
+                observableResult.set(mCurrentValue);
             } else {
                 // entering decimal numbers
                 if ( !mCurrentValue.contains(Const.COMMA)) {
@@ -103,7 +104,7 @@ public class Calculator {
                         mCurrentValue = mCurrentValue + number;
                     }
                 }
-                mScreenResult = mCurrentValue;
+                observableResult.set(mCurrentValue);
             }
         }
     }
@@ -114,14 +115,14 @@ public class Calculator {
     public void clearScreenClicked()  {
         mCurrentValue = Const.EMPTY;
         mHiddenValue = Const.EMPTY;
-        mScreenResult = Const.EMPTY;
-        mMiniDisplayResult = Const.EMPTY;
+        observableResult.set(Const.EMPTY);
+        observableMiniDisplayResult.set(Const.EMPTY);
         mOperation = null;
         mCommaClicked = false;
     }
 
     public void operatorClicked(String oper) {
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
         switch (oper) {
             case Const.OPER_MULT: mOperation = Operations.MULTIPLY;
                 break;
@@ -135,20 +136,14 @@ public class Calculator {
         if( !mCurrentValue.equals(Const.EMPTY)) {
             mHiddenValue = mCurrentValue;
         }
-        mScreenResult = Const.EMPTY;
+        mCurrentValue = Const.EMPTY;
+        observableResult.set(Const.EMPTY);
         mCommaClicked = false;
     }
 
-    public String getMiniDisplayResult() {
-        if(mMiniDisplayResult == null) {
-            return Const.EMPTY;
-        }
-        return mMiniDisplayResult;
-    }
-
     public void equalsClicked() {
-        setMiniDisplayResult();
-        if( !mHiddenValue.equals(Const.EMPTY) && !mCurrentValue.equals(Const.EMPTY)) {
+        if( !mHiddenValue.equals(Const.EMPTY) && mOperation != null && !mCurrentValue.equals(Const.EMPTY)) {
+            setMiniDisplayResult();
             double hiddenValDouble = Double.parseDouble(mHiddenValue);
             double currentValDouble = Double.parseDouble(mCurrentValue);
 
@@ -170,7 +165,7 @@ public class Calculator {
                 mCurrentValue = String.valueOf(hiddenValDouble - currentValDouble);
             }
             mHiddenValue = mCurrentValue;
-            mScreenResult = mCurrentValue;
+            observableResult.set(mCurrentValue);
             mCurrentValue = Const.EMPTY;
             mOperation = null;
             mCommaClicked = false;
@@ -189,8 +184,12 @@ public class Calculator {
             case MINUS : strOperation = Const.OPER_MINUS;
                 break;
         }
-        mMiniDisplayResult = mHiddenValue + Const.SPACE
-                + strOperation + Const.SPACE + mCurrentValue  + Const.SPACE;
+        observableMiniDisplayResult.set(mHiddenValue + Const.SPACE
+                + strOperation + Const.SPACE + mCurrentValue  + Const.SPACE );
+    }
+
+    public String getMiniDisplayResult() {
+        return observableMiniDisplayResult.get();
     }
 
     private void nanExceptionReport() {
@@ -202,31 +201,31 @@ public class Calculator {
      * method changed the sign +/- of entered value
      */
     public void toggleChanged() {
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
                 mCurrentValue = mCurrentValue.substring(Const.ONE_VALUE, (mCurrentValue.length()));
             } else {
                 mCurrentValue = Const.OPER_MINUS + mCurrentValue;
             }
-            mScreenResult = mCurrentValue;
+            observableResult.set(mCurrentValue);
         }
     }
 
     private void commaClicked() {
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
         // it is possible to enter decimal
         mCommaClicked = true;
     }
 
     private void deleteClicked() {
-        mMiniDisplayResult = Const.EMPTY;
+        observableMiniDisplayResult.set(Const.EMPTY);
         if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
                 || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {
             // delete last number
             mCurrentValue = mCurrentValue.substring(
                     Const.ZERO_VALUE, mCurrentValue.length()- Const.ONE_VALUE);
-            mScreenResult = mCurrentValue;
+            observableResult.set(mCurrentValue);
             mHiddenValue = Const.EMPTY;
         }
     }
