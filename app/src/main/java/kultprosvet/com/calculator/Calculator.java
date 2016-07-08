@@ -178,6 +178,10 @@ public class Calculator {
         observableMiniDisplayResult.set(Const.EMPTY);
         // it is possible to enter decimal
         mCommaClicked = true;
+        if(observableResult.get().length() != Const.ZERO_VALUE && !observableResult.get().equals(Const.ZERO)) {
+            // after equals clicked, if want to enter desimal after result
+            mCurrentValue = observableResult.get();
+        }
     }
 
     protected void deleteClicked() {
