@@ -29,43 +29,43 @@ public class Calculator {
         return sCalcInstance;
     }
 
-    public void calculate(String btnText) {
-        switch (btnText) {
-            case Const.ONE:
-            case Const.TWO:
-            case Const.THREE:
-            case Const.FOUR:
-            case Const.FIVE:
-            case Const.SIX:
-            case Const.SEVEN:
-            case Const.EIGHT:
-            case Const.NINE:
-            case Const.ZERO:
-                numberClicked(Integer.parseInt(btnText));
-                break;
-            case Const.COMMA:
-                commaClicked();
-                break;
-            case Const.OPER_MULT:
-            case Const.OPER_DELIM:
-            case Const.OPER_PLUS:
-            case Const.OPER_MINUS:
-                operatorClicked(btnText);
-                break;
-            case Const.EQUALS:
-                equalsClicked();
-                break;
-            case Const.CLEAR:
-                clearScreenClicked();
-                break;
-            case Const.DELETE:
-                deleteClicked();
-                break;
-            case Const.TOGGLE:
-                toggleChanged();
-                break;
-        }
-    }
+//    public void calculate(String btnText) {
+//        switch (btnText) {
+//            case Const.ONE:
+//            case Const.TWO:
+//            case Const.THREE:
+//            case Const.FOUR:
+//            case Const.FIVE:
+//            case Const.SIX:
+//            case Const.SEVEN:
+//            case Const.EIGHT:
+//            case Const.NINE:
+//            case Const.ZERO:
+//                numberClicked(Integer.parseInt(btnText));
+//                break;
+//            case Const.OPER_MULT:
+//            case Const.OPER_DELIM:
+//            case Const.OPER_PLUS:
+//            case Const.OPER_MINUS:
+//                operatorClicked(btnText);
+//                break;
+//            case Const.COMMA:
+//                commaClicked();
+//                break;
+//            case Const.EQUALS:
+//                equalsClicked();
+//                break;
+//            case Const.CLEAR:
+//                clearScreenClicked();
+//                break;
+//            case Const.DELETE:
+//                deleteClicked();
+//                break;
+//            case Const.TOGGLE:
+//                toggleChanged();
+//                break;
+//        }
+//    }
 
     public String getScreenResult() {
         return observableResult.get();
@@ -75,7 +75,7 @@ public class Calculator {
         mCurrentValue = value;
     }
 
-    private void numberClicked(int number){
+    protected void numberClicked(int number){
         observableMiniDisplayResult.set(Const.EMPTY);
         if( number == Const.ZERO_VALUE
                 && !mCommaClicked
@@ -109,19 +109,7 @@ public class Calculator {
         }
     }
 
-    /**
-     * clear all fields
-     */
-    public void clearScreenClicked()  {
-        mCurrentValue = Const.EMPTY;
-        mHiddenValue = Const.EMPTY;
-        observableResult.set(Const.EMPTY);
-        observableMiniDisplayResult.set(Const.EMPTY);
-        mOperation = null;
-        mCommaClicked = false;
-    }
-
-    public void operatorClicked(String oper) {
+    protected void operatorClicked(String oper) {
         observableMiniDisplayResult.set(Const.EMPTY);
         switch (oper) {
             case Const.OPER_MULT: mOperation = Operations.MULTIPLY;
@@ -141,7 +129,7 @@ public class Calculator {
         mCommaClicked = false;
     }
 
-    public void equalsClicked() {
+    protected void equalsClicked() {
         if( !mHiddenValue.equals(Const.EMPTY) && mOperation != null && !mCurrentValue.equals(Const.EMPTY)) {
             setMiniDisplayResult();
             double hiddenValDouble = Double.parseDouble(mHiddenValue);
@@ -198,9 +186,21 @@ public class Calculator {
     }
 
     /**
+     * clear all fields
+     */
+    protected void clearScreenClicked()  {
+        mCurrentValue = Const.EMPTY;
+        mHiddenValue = Const.EMPTY;
+        observableResult.set(Const.EMPTY);
+        observableMiniDisplayResult.set(Const.EMPTY);
+        mOperation = null;
+        mCommaClicked = false;
+    }
+
+    /**
      * method changed the sign +/- of entered value
      */
-    public void toggleChanged() {
+    protected void toggleChanged() {
         observableMiniDisplayResult.set(Const.EMPTY);
         if(mCurrentValue.length() != Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)) {
             if (String.valueOf(mCurrentValue.charAt(Const.ZERO_VALUE)).equals(Const.OPER_MINUS)) {
@@ -212,13 +212,13 @@ public class Calculator {
         }
     }
 
-    private void commaClicked() {
+    protected void commaClicked() {
         observableMiniDisplayResult.set(Const.EMPTY);
         // it is possible to enter decimal
         mCommaClicked = true;
     }
 
-    private void deleteClicked() {
+    protected void deleteClicked() {
         observableMiniDisplayResult.set(Const.EMPTY);
         if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
                 || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {

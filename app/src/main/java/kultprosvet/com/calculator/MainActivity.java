@@ -38,12 +38,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * set onClick for all buttons
+     * set onClick for all buttons with numbers
+     * @param view - clicked button
+     */
+    public void onNumberButtonClick(View view) {
+        String btnText = ((Button) view).getText().toString();
+        mCalc.numberClicked(Integer.parseInt(btnText));
+    }
+
+    /**
+     * set onClick for all buttons with arithmetic operators
+     * @param view - clicked button
+     */
+    public void onOperatorButtonClick(View view) {
+        String btnText = ((Button) view).getText().toString();
+        mCalc.operatorClicked(btnText);
+    }
+
+    /**
+     * set onClick for all others buttons
      * @param view - clicked button
      */
     public void onButtonClick(View view) {
-        String btnText = ((Button)view).getText().toString();
-        mCalc.calculate(btnText);
+        int id = view.getId();
+        switch (id) {
+            case R.id.button_comma:
+                mCalc.commaClicked();
+                break;
+            case R.id.button_clear:
+                mCalc.clearScreenClicked();
+                break;
+            case R.id.button_delete:
+                mCalc.deleteClicked();
+                break;
+            case R.id.button_toggle:
+                mCalc.toggleChanged();
+                break;
+            case R.id.button_equals:
+                mCalc.equalsClicked();
+                break;
+        }
     }
 
 //    private void setScreenView(String value) {
