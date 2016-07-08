@@ -178,6 +178,11 @@ public class Calculator {
 
     protected void deleteClicked() {
         observableMiniDisplayResult.set(Const.EMPTY);
+        if ( observableResult.get().length() > Const.ZERO_VALUE && !observableResult.get().equals(Const.ZERO)
+                || observableResult.get().length() > Const.ZERO_VALUE && !observableResult.get().equals(Const.EMPTY)) {
+            // after equals clicked, if delete last number of result value
+            mCurrentValue = observableResult.get();
+        }
         if ( mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.ZERO)
                 || mCurrentValue.length() > Const.ZERO_VALUE && !mCurrentValue.equals(Const.EMPTY)) {
             // delete last number

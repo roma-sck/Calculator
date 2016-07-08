@@ -13,15 +13,14 @@ import android.widget.Button;
 import kultprosvet.com.calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
     private Calculator mCalc;
-    private ActivityMainBinding binding;
+//    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mCalc = Calculator.getInstance(this);
         binding.setCalc(mCalc);
         binding.setActivity(this);
