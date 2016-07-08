@@ -29,50 +29,8 @@ public class Calculator {
         return sCalcInstance;
     }
 
-//    public void calculate(String btnText) {
-//        switch (btnText) {
-//            case Const.ONE:
-//            case Const.TWO:
-//            case Const.THREE:
-//            case Const.FOUR:
-//            case Const.FIVE:
-//            case Const.SIX:
-//            case Const.SEVEN:
-//            case Const.EIGHT:
-//            case Const.NINE:
-//            case Const.ZERO:
-//                numberClicked(Integer.parseInt(btnText));
-//                break;
-//            case Const.OPER_MULT:
-//            case Const.OPER_DELIM:
-//            case Const.OPER_PLUS:
-//            case Const.OPER_MINUS:
-//                operatorClicked(btnText);
-//                break;
-//            case Const.COMMA:
-//                commaClicked();
-//                break;
-//            case Const.EQUALS:
-//                equalsClicked();
-//                break;
-//            case Const.CLEAR:
-//                clearScreenClicked();
-//                break;
-//            case Const.DELETE:
-//                deleteClicked();
-//                break;
-//            case Const.TOGGLE:
-//                toggleChanged();
-//                break;
-//        }
-//    }
-
     public String getScreenResult() {
         return observableResult.get();
-    }
-
-    public void setCurrentValue(String value) {
-        mCurrentValue = value;
     }
 
     protected void numberClicked(int number){

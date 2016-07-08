@@ -15,26 +15,16 @@ import kultprosvet.com.calculator.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private Calculator mCalc;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mCalc = Calculator.getInstance(this);
         binding.setCalc(mCalc);
         binding.setActivity(this);
-
-//        if (savedInstanceState != null){
-//            mDisplayedValue = savedInstanceState.getString(Const.SAVED_VALUE_KEY);
-//            setScreenView(mDisplayedValue);
-//        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(Const.SAVED_VALUE_KEY, mCalc.getScreenResult());
     }
 
     /**
@@ -79,14 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
-//    private void setScreenView(String value) {
-//        if(value == null || value.equals(Const.EMPTY)) {
-//            mScreenView.setText(String.valueOf(Const.ZERO));
-//        } else {
-//            mScreenView.setText(String.valueOf(value));
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

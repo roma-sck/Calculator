@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--data tag inside layout serves as a wrapper for the variables used in the markup -->
     <data>
-         <!--variable tag contains name and type, which describes the variable name and its full name -->
+        <!--variable tag contains name and type, which describes the variable name and its full name -->
         <variable
             name="calc"
             type="kultprosvet.com.calculator.Calculator"/>
@@ -42,7 +42,7 @@
                 android:id="@+id/result_screen"
                 style="@style/ResultScreenStyle"
                 android:text="@{calc.observableResult, default=0}" />
-             <!--@{}-container inside described the binding expression-->
+            <!--@{}-container inside described the binding expression-->
         </LinearLayout>
 
         <Button
