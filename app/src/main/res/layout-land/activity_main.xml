@@ -45,98 +45,98 @@
             android:id="@+id/button_plus"
             style="@style/ButtonStyle"
             android:text="@string/button_plus_text"
-            android:onClick='@{activity.onOperatorButtonClick}' />
+            android:onClick="@{activity::onOperatorButtonClick}" />
         <Button
             android:id="@+id/button_minus"
             style="@style/ButtonStyle"
             android:text="@string/button_minus_text"
-            android:onClick='@{activity.onOperatorButtonClick}' />
+            android:onClick="@{activity::onOperatorButtonClick}" />
         <Button
             android:id="@+id/button1"
             style="@style/ButtonStyle"
             android:text="@string/button1_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button2"
             style="@style/ButtonStyle"
             android:text="@string/button2_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button3"
             style="@style/ButtonStyle"
             android:text="@string/button3_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button4"
             style="@style/ButtonStyle"
             android:text="@string/button4_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button_multiply"
             style="@style/ButtonStyle"
             android:text="@string/button_multiply_text"
-            android:onClick='@{activity.onOperatorButtonClick}' />
+            android:onClick="@{activity::onOperatorButtonClick}" />
         <Button
             android:id="@+id/button_delim"
             style="@style/ButtonStyle"
             android:text="@string/button_delim_text"
-            android:onClick='@{activity.onOperatorButtonClick}' />
+            android:onClick="@{activity::onOperatorButtonClick}" />
         <Button
             android:id="@+id/button5"
             style="@style/ButtonStyle"
             android:text="@string/button5_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button6"
             style="@style/ButtonStyle"
             android:text="@string/button6_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button7"
             style="@style/ButtonStyle"
             android:text="@string/button7_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button8"
             style="@style/ButtonStyle"
             android:text="@string/button8_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button_delete"
             style="@style/ButtonStyle"
             android:text="@string/button_delete_text"
-            android:onClick='@{activity.onButtonClick}' />
+            android:onClick="@{activity::onButtonClick}" />
         <Button
             android:id="@+id/button_clear"
             style="@style/ButtonStyle"
             android:text="@string/button_clear_text"
-            android:onClick='@{activity.onButtonClick}' />
+            android:onClick="@{activity::onButtonClick}" />
         <Button
             android:id="@+id/button9"
             style="@style/ButtonStyle"
             android:text="@string/button9_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button0"
             style="@style/ButtonStyle"
             android:text="@string/button0_text"
-            android:onClick='@{activity.onNumberButtonClick}' />
+            android:onClick="@{activity::onNumberButtonClick}" />
         <Button
             android:id="@+id/button_comma"
             style="@style/ButtonStyle"
             android:text="@string/button_comma_text"
-            android:onClick='@{activity.onButtonClick}' />
+            android:onClick="@{activity::onButtonClick}" />
         <Button
             android:id="@+id/button_toggle"
             style="@style/ButtonStyle"
             android:text="@string/button_toogle_text"
-            android:onClick='@{activity.onButtonClick}' />
+            android:onClick="@{activity::onButtonClick}" />
         <Button
             android:id="@+id/button_equals"
             style="@style/ButtonStyle"
             android:text="@string/button_equals_text"
             app:layout_columnSpan="2"
-            android:onClick='@{activity.onButtonClick}' />
+            android:onClick="@{activity::onButtonClick}" />
 
     </android.support.v7.widget.GridLayout>
 </layout>
